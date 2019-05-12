@@ -18,8 +18,8 @@ public class fps_GunScript : MonoBehaviour
     public AudioClip damageAudio;
     public AudioClip dryFireAudio;
     public GameObject explosion;
-    public int bulletCount = 30; // 弹匣子弹数量
-    public int chargerBulletCount = 60;
+    public int bulletCount = 60; // 弹匣子弹数量
+    public int chargerBulletCount = 120; //弹夹子弹
     public Text bulletText;
 
     private string reloadAnim = "Reload";
@@ -30,8 +30,8 @@ public class fps_GunScript : MonoBehaviour
     private string idleAnim = "Idle";
 
     private Animation anim;
-    private float nextFireTime = 0.0f;
-    private MeshRenderer flash;
+    private float nextFireTime = 0.0f; // 射击间隔
+    private MeshRenderer flash; // 闪光效果
     private int currentBullet;
     private int currentChargeBullet;
     private fps_PlayerParameter parameter;

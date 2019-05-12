@@ -1,14 +1,24 @@
 # GameBreak 
 *Computer Graphics Game Project*
 
+**这个版本是完成子弹时间后的版本, 目前不知道为什么无法调整弹药量**
 
+## 待完成
 
+1. 配音
+   1. 技能声音
+   2. 背景音乐
+2. 子弹时间时画面变暗, 敌人高亮, 可否做到?
+3. UI
+   1. 子弹时间时长; 冷却时间
+   2. 弹药量
 
-##  Unity底层设计（刘，实现教程中展现的所有内容）
+~~Unity底层设计（刘，实现教程中展现的所有内容）~~
 
 ##  子弹时间（张）
-1. 除主角摄像机速度外均减速
-2. 判断条件, 对主角摄像机速度进行逆运算
+~~1. 除主角摄像机速度外均减速~~
+~~2. 判断条件, 对主角摄像机速度进行逆运算~~
+
 3. 子弹时间场景颜色变换？（待选）
    
 ##  传送门（张）
@@ -45,20 +55,24 @@ logo
 - 6m5m
 - unity官网
 - 微元素
-## 进度
-~~4.14 大家见面确定下一步计划~~
-~~需要人物建模。动作脚本，多找几个。~~
+
 
 ## Problem
 
-发现无法push到fork的仓库, 应该是需要在新分支中push
+~~发现无法push到fork的仓库, 应该是需要在新分支中push
 
-能不能合并仓库?
+~~能不能合并仓库?
 
 
 
-另外lfs需要先装好再建仓库, 已经建好的则需要删掉重建
+lfs需要先装好再建仓库, 已经建好的则需要删掉重建
 
 [Git branch -r 无法获取远程分支](https://www.cnblogs.com/leodaxin/p/8569061.html)
 
 Git LFS on github.com does not currently support pushing LFS objects to public forks. GitHub Enterprise does support this behavior. -> [can not upload new objects to public fork](https://github.com/git-lfs/git-lfs/issues/1906)
+
+
+
+
+
+

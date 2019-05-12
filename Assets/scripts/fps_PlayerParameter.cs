@@ -18,5 +18,6 @@ public class fps_PlayerParameter : MonoBehaviour
     public bool inputFire;
     [HideInInspector]
     public bool inputReload;
-
+    [HideInInspector]
+    public bool inputTimeSlow;
 }

@@ -29,6 +29,7 @@ public class fps_input : MonoBehaviour
                 AddButton("Jump",KeyCode.Space);
                 AddButton("Crouch",KeyCode.C);
                 AddButton("Sprint",KeyCode.LeftShift);
+                AddButton("TimeSlow", KeyCode.Q);
             }
         }
 

@@ -35,5 +35,6 @@ public class fps_FPInput : MonoBehaviour
         parameter.inputSprint = input.GetButton("Sprint");
         parameter.inputFire = input.GetButton("Fire");
         parameter.inputReload = input.GetButtonDown("Reload");
+        parameter.inputTimeSlow = input.GetButtonDown("TimeSlow");
     }
 }

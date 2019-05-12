@@ -37,6 +37,13 @@ public class fps_PlayerControl : MonoBehaviour
     public float crouchJumpSpeed = 5.0f;
     public float crouchDeltaHeight = 0.5f;
 
+    public float skillAbility = 0.01f; // 变缓的程度
+    public float skillStartTime = 0.0f; // 刚按下子弹时间的时间
+    public float skillEndTime = 0.0f; // 技能结束时间
+    public float skillColdTime = 2.0f; // 技能冷却时间
+    public float skillContinueTime = 10.0f; // 技能持续时间
+    public bool useSkill = false; // 用过技能否?
+
     public float gravity = 20.0f;
     public float cameraMoveSpeed = 8.0f;
     public AudioClip jumpAudio;
@@ -82,6 +89,44 @@ public class fps_PlayerControl : MonoBehaviour
     {
         UpdateMove();
         AudioManagement();
+        //UpdateFixedTime();
+    }
+    private void Update()
+    {
+        UpdateTime();
+    }
+    private void UpdateTime()
+    {
+        if (parameter.inputTimeSlow && skillStartTime <= 0.0001f
+             && (Time.realtimeSinceStartup - skillEndTime > (skillColdTime) || !useSkill) 
+             // 此处不知道为什么测试中的实际冷却时间是原来的3倍
+             // 应该是别的地方有定义 coldtime 为15, 所以初始化无效, 改变量名以后则正常
+            )
+        {
+            useSkill = true;
+            skillStartTime = Time.realtimeSinceStartup;
+            Time.timeScale *= skillAbility;
+            //speed /= skillAbility; // 如果单纯加速这个, 会导致时间静止的瞬间主角的位置突然向前
+            //jumpSpeed /= skillAbility;
+            cameraMoveSpeed /= skillAbility;
+            //Debug.Log("skillStartTime, 111111.. " + skillStartTime);
+            //Debug.Log("cold?, 111111.. " + (Time.realtimeSinceStartup - skillEndTime)+ "   skillColdTime:  " + skillColdTime);
+        }
+        else
+        {
+            if (skillStartTime != 0 && Time.realtimeSinceStartup - skillStartTime >= skillContinueTime)
+            {
+                Time.timeScale /= skillAbility;
+                //speed *= skillAbility;
+                //jumpSpeed *= skillAbility;
+                cameraMoveSpeed *= skillAbility;
+                skillStartTime = 0.0f;
+                skillEndTime = Time.realtimeSinceStartup;
+                //Debug.Log("skillStartTime, 22222222222222222222.. " + skillStartTime);
+                //Debug.Log("cold?, 22222222222222222222.. " + (Time.realtimeSinceStartup - skillEndTime));
+            }
+        }
+       
     }
     private void UpdateMove()
     {

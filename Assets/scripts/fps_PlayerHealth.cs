@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.ImageEffects;
+using UnityEngine.UI;
 public class fps_PlayerHealth : MonoBehaviour
 {
 
     public bool isDead;
-    public float resetAfterDeathTime = 5;
+    public float resetAfterDeathTime = 2;
     public AudioClip deathClip;
     public AudioClip damageClip;
     public float maxHp = 100;
     public float hp = 100;
     public float recoverSpeed = 1;
-
+    public Slider HPSlider;
     private float timer = 0;
     private FadeInOut fader;
     private ColorCorrectionCurves colorCurves;
@@ -23,7 +24,7 @@ public class fps_PlayerHealth : MonoBehaviour
         fader = GameObject.FindGameObjectWithTag(tags.fader).GetComponent<FadeInOut>();
         colorCurves = GameObject.FindGameObjectWithTag(tags.mainCamera).GetComponent<ColorCorrectionCurves>();
         BleedBehavior.BloodAmount = 0;
-
+        HPSlider.value = HPSlider.maxValue = hp;
     }
      void Update()
     {
@@ -32,6 +33,7 @@ public class fps_PlayerHealth : MonoBehaviour
             hp += recoverSpeed * Time.deltaTime;
             if (hp > maxHp)
                 hp = maxHp;
+            HPSlider.value = hp;
         }
         if (hp < 0)
         {
@@ -50,6 +52,7 @@ public class fps_PlayerHealth : MonoBehaviour
         AudioSource.PlayClipAtPoint(damageClip, transform.position);
         BleedBehavior.BloodAmount += Mathf.Clamp01(damage / hp);
         hp -= damage;
+        HPSlider.value = hp;
     }
     public void DisableInput()//玩家通关或者死亡时，禁止输入
     {

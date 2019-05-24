@@ -36,12 +36,14 @@ public class fps_GunScript : MonoBehaviour
     private int currentChargeBullet;
     private fps_PlayerParameter parameter;
     private fps_PlayerControl playerControl;
+    private AudioSource audioSource;
 
     private void Start()
     {
         parameter = GameObject.FindGameObjectWithTag(tags.player).GetComponent<fps_PlayerParameter>();
         playerControl = GameObject.FindGameObjectWithTag(tags.player).GetComponent<fps_PlayerControl>();
         anim = this.GetComponent<Animation>();
+        audioSource = this.GetComponent<AudioSource>();
         flash = this.transform.Find("muzzle_flash").GetComponent<MeshRenderer>();
         flash.enabled = false;
         currentBullet = bulletCount;
@@ -95,6 +97,7 @@ public class fps_GunScript : MonoBehaviour
             {
                 anim.Rewind(fireAnim);
                 anim.Play(fireAnim);
+                //if (playerControl.skillStartTime != 0) audioSource.pitch = playerControl.skillAbility; else audioSource.pitch = 1.0f;
                 AudioSource.PlayClipAtPoint(dryFireAudio, transform.position);
                 return;
             }
@@ -136,7 +139,17 @@ public class fps_GunScript : MonoBehaviour
 
     private void DamageEnemy()
     {
-      
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit)) {
+            if (hit.transform.tag == tags.enemy && hit.collider is CapsuleCollider) {
+                AudioSource.PlayClipAtPoint(damageAudio, hit.transform.position);
+                GameObject go = Instantiate(explosion, hit.point, Quaternion.identity);
+                Destroy(go, 3);
+                hit.transform.GetComponent<fps_EnemyHealth>().TakeDamage(damage);
+            }
+        }
         
     }
 

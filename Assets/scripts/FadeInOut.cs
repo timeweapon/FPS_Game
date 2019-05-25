@@ -160,7 +160,7 @@ using UnityEngine.SceneManagement;
                 _rawImage.color = Color.black;
                 //布尔条件当到达指定的阿尔法值得时候设置为false
                 _isSceneToBlack = false;
-            sceneStarting = true;
+                sceneStarting = true;
                 SceneManager.LoadScene("Demo");
             }
         }

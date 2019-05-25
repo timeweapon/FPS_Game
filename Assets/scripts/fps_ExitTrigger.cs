@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class fps_ExitTrigger : MonoBehaviour
 {
@@ -50,6 +51,8 @@ public class fps_ExitTrigger : MonoBehaviour
 
         }
         if (timer >= timeToRestart)
-            fader.EndScene();
+            //fader.EndScene();
+            SceneManager.LoadScene("Start");
+            Cursor.visible = true;
     }
 }

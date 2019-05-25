@@ -27,7 +27,7 @@ public class fps_EnemySight : MonoBehaviour
         player = GameObject.FindGameObjectWithTag(tags.player);
         playerHealth = player.GetComponent<fps_PlayerHealth>();
         playerControl = player.GetComponent<fps_PlayerControl>();
-
+        playerPosition = resetPosition;
         fps_GunScript.PlayerShootEvent += ListenPlayer;
 
     }
@@ -52,7 +52,8 @@ public class fps_EnemySight : MonoBehaviour
             {
                 if (Physics.Raycast(transform.position + transform.up, direction.normalized, out RaycastHit hit, col.radius)) ;
                 {
-                    if(hit.collider.gameObject==player)
+                    if(hit.collider.tag=="Player")
+                        //.gameObject==player)
                     {
                         PlayerInSight = true;
                         playerPosition = player.transform.position;

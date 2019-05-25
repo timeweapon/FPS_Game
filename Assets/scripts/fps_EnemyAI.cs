@@ -32,7 +32,10 @@ public class fps_EnemyAI : MonoBehaviour
         if (enemySight.PlayerInSight && playerHealth.hp > 0f)
             Shooting();
         else if (enemySight.playerPosition != enemySight.resetPosition && playerHealth.hp > 0f)//追击
+        {
             Chasing();
+            Debug.Log("is Chasing");
+        }
         else
             Patrolling();
 

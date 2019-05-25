@@ -50,8 +50,7 @@ public class fps_EnemySight : MonoBehaviour
             float angle = Vector3.Angle(direction, transform.forward);
             if (angle < fieldOfViewAngle * 0.5F)//射线判断障碍物
             {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius));
+                if (Physics.Raycast(transform.position + transform.up, direction.normalized, out RaycastHit hit, col.radius)) ;
                 {
                     if(hit.collider.gameObject==player)
                     {

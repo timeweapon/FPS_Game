@@ -4,17 +4,18 @@
 ## 待完成
 
 - UI
-  - 开始画面(范)
+  - ~~开始画面(范)~~
   - 按键配置
-- ESC or 菜单页面退出游戏
+  - ESC or 菜单页面退出游戏
   - 子弹时间时画面变暗, 敌人高亮, 可否做到?
 - 传送门
   - 玩家创建(黄)
   - 方向bug(黄)
+  - 更换主角模型?
 - 子弹实体
   - 更换模型
 - 设计
-- 敌人配置
+  - 敌人配置
 - Bug
   - AI穿模
   - 抬头看天
@@ -75,3 +76,5 @@ Git LFS on github.com does not currently support pushing LFS objects to public f
 
 
 Google BulletTIme Git Youtube
+
+![1558782880585](C:\Users\Hasee\AppData\Roaming\Typora\typora-user-images\1558782880585.png)

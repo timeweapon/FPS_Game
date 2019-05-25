@@ -23,7 +23,6 @@ public class fps_EnemyHealth : MonoBehaviour
         {
             isDead = true;
 
-            GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<fps_EnemyAnimation>().enabled = false;
             GetComponent<fps_EnemyAI>().enabled = false;
             GetComponent<fps_EnemyShoot>().enabled = false;
@@ -31,6 +30,8 @@ public class fps_EnemyHealth : MonoBehaviour
             GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
             GetComponentInChildren<Light>().enabled = false;
             GetComponentInChildren<LineRenderer>().enabled = false;
+            //GetComponent<CapsuleCollider>().attachedRigidbody.AddForce(0, 1, 0); // 说明是attach到刚体上的
+            GetComponent<CapsuleCollider>().enabled = false;
 
             anim.SetBool(hash.playerInSightBool, false);
             anim.SetBool(hash.deadBool,true);

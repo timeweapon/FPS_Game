@@ -35,6 +35,15 @@ public class fps_EnemyAI : MonoBehaviour
             Chasing();
         else
             Patrolling();
+
+        //RaycastHit hit;
+        //Vector3 p1 = transform.position;
+        //Vector3 p2 = p1 + Vector3.forward * 0.5f;
+        //if (Physics.CapsuleCast(p1, p2, 0.0f, transform.forward, out hit, 0.2f))
+        //{
+        //    //停止该角色
+        //    //nav..OnStopMove(uqid_);
+        //}
     }
 
     private void Shooting()

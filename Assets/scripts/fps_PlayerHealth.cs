@@ -18,7 +18,7 @@ public class fps_PlayerHealth : MonoBehaviour
     private FadeInOut fader;
     private ColorCorrectionCurves colorCurves;
 
-   void Start()
+    void Start()
     {
         hp = maxHp;
         fader = GameObject.FindGameObjectWithTag(tags.fader).GetComponent<FadeInOut>();
@@ -68,6 +68,7 @@ public class fps_PlayerHealth : MonoBehaviour
 
     public void PlayerDead()
     {
+        Time.timeScale = 1;
         isDead = true;
         colorCurves.enabled = true;
         DisableInput();

@@ -9,7 +9,6 @@ public class fps_EnemyHealth : MonoBehaviour
     private Animator anim;
     private HashIDs hash;
     private bool isDead = false;
-
     void Start()
     {
         anim = this.GetComponent<Animator>();
@@ -23,6 +22,7 @@ public class fps_EnemyHealth : MonoBehaviour
         if(hp<=0 && !isDead)
         {
             isDead = true;
+
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<fps_EnemyAnimation>().enabled = false;
             GetComponent<fps_EnemyAI>().enabled = false;

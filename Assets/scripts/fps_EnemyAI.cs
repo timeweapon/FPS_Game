@@ -30,15 +30,19 @@ public class fps_EnemyAI : MonoBehaviour
     void Update()
     {
         if (enemySight.PlayerInSight && playerHealth.hp > 0f)
+        { 
             Shooting();
+            //Debug.Log("is Shooting");
+        }
         else if (enemySight.playerPosition != enemySight.resetPosition && playerHealth.hp > 0f)//追击
         {
             Chasing();
-            Debug.Log("is Chasing");
+            //Debug.Log("is Chasing");
         }
-        else
+        else { 
             Patrolling();
-
+            //Debug.Log("is Patrolling");
+        }
         //RaycastHit hit;
         //Vector3 p1 = transform.position;
         //Vector3 p2 = p1 + Vector3.forward * 0.5f;

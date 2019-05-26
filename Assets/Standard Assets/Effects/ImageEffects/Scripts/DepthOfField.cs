@@ -256,7 +256,10 @@ namespace UnityStandardAssets.ImageEffects
                     dx11bokehMaterial.SetVector ("_Screen", new Vector3(1.0f/(1.0f*source.width), 1.0f/(1.0f*source.height), internalBlurWidth));
                     dx11bokehMaterial.SetPass (2);
 
-                    Graphics.DrawProceduralIndirectNow (MeshTopology.Points, cbDrawArgs, 0);
+
+                    //Graphics.DrawProceduralIndirect (MeshTopology.Points, cbDrawArgs, 0);
+                    Graphics.DrawProceduralIndirectNow(MeshTopology.Points, cbDrawArgs, 0);
+
 
                     Graphics.Blit (dest2, destination);	// hackaround for DX11 high resolution flipfun (OPTIMIZEME)
 

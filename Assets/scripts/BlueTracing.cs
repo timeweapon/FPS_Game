@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BlueTracing : MonoBehaviour
 {
+    private GameObject player;
     public GameObject testcamera;
     public GameObject bluecamera;
     public GameObject orangecamera;
@@ -13,6 +14,33 @@ public class BlueTracing : MonoBehaviour
     public Vector3 test;
     public Camera be;
     public bool transportenable = true;
+    void Start()
+    {
+        testcamera = GameObject.Find("FP_Camera");
+        bluedoor = GameObject.Find("BlueDoor");
+        orangedoor = GameObject.Find("OrangeDoor");
+        bluecamera = GameObject.Find("BlueCamera");
+        orangecamera = GameObject.Find("OrangeCamera");
+        be = orangecamera.GetComponent<Camera>();
+        player = GameObject.FindGameObjectWithTag(tags.player);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        var cpos = testcamera.transform.position;
+        var mt = bluedoor.transform.worldToLocalMatrix;
+        mt = Matrix4x4.TRS(Vector3.zero, Quaternion.AngleAxis(180, Vector3.up), Vector3.one) * mt;
+        orangecamera.transform.localPosition = mt.MultiplyPoint(cpos);
+        mid = orangecamera.transform.localPosition;
+        mid[1] = -mid[1];
+        mid[2] = -mid[2];
+        orangecamera.transform.localPosition = mid;
+        orangecamera.transform.LookAt(orangedoor.transform.position);
+        be.nearClipPlane = TwoPointDistance3D(be.transform.position, orangedoor.transform.position);
+        const float renderHeight = 4f;
+        be.fieldOfView = 2 * Mathf.Atan(renderHeight / 2 / be.nearClipPlane) * Mathf.Rad2Deg;
+    }
     // Start is called before the first frame update
     public float TwoPointDistance3D(Vector3 p1, Vector3 p2)
     {
@@ -25,8 +53,9 @@ public class BlueTracing : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("BlueIn");
-        if (transportenable){
+        //Debug.Log("BlueIn");
+        if (transportenable && other.gameObject == player)
+        {
             orangedoor.GetComponent<OrangeTracing>().transportenable = false;
             if (other.GetComponent<CharacterController>() != null){
                 other.GetComponent<CharacterController>().enabled = false;
@@ -49,34 +78,8 @@ public class BlueTracing : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("BlueOut");
+        //Debug.Log("BlueOut");
         transportenable = true;
     }
-    void Start()
-    {
-        testcamera = GameObject.Find("FP_Camera");
-        bluedoor = GameObject.Find("BlueDoor");
-        orangedoor = GameObject.Find("OrangeDoor");
-        bluecamera = GameObject.Find("BlueCamera");
-        orangecamera = GameObject.Find("OrangeCamera");
-        be = orangecamera.GetComponent<Camera>();
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        var cpos = testcamera.transform.position;
-        var mt = bluedoor.transform.worldToLocalMatrix;
-        mt = Matrix4x4.TRS(Vector3.zero, Quaternion.AngleAxis(180, Vector3.up), Vector3.one) * mt;
-        orangecamera.transform.localPosition = mt.MultiplyPoint(cpos);
-        mid = orangecamera.transform.localPosition;
-        mid[1] = -mid[1];
-        mid[2] = -mid[2];
-        orangecamera.transform.localPosition = mid;
-        orangecamera.transform.LookAt(orangedoor.transform.position);
-        be.nearClipPlane = TwoPointDistance3D(be.transform.position, orangedoor.transform.position);
-        const float renderHeight = 4f;
-        be.fieldOfView = 2 * Mathf.Atan(renderHeight / 2 / be.nearClipPlane) * Mathf.Rad2Deg;
-    }
 }

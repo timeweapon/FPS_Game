@@ -50,7 +50,7 @@ public class fps_EnemySight : MonoBehaviour
             float angle = Vector3.Angle(direction, transform.forward);
             if (angle < fieldOfViewAngle * 0.5F)//射线判断障碍物
             {
-                if (Physics.Raycast(transform.position + transform.up, direction.normalized, out RaycastHit hit, col.radius)) ;
+                if (Physics.Raycast(transform.position + transform.up, direction.normalized, out RaycastHit hit, col.radius)) 
                 {
                     if(hit.collider.tag=="Player")
                         //.gameObject==player)
@@ -63,7 +63,7 @@ public class fps_EnemySight : MonoBehaviour
                 }
 
             }
-            if (playerControl.State == PlayerState.Walk || playerControl.State == PlayerState.Run) ;
+            if (playerControl.State == PlayerState.Walk || playerControl.State == PlayerState.Run) 
             {
                 ListenPlayer();
 
@@ -82,7 +82,7 @@ public class fps_EnemySight : MonoBehaviour
 
     private void ListenPlayer()//侦听=玩家距离
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= col.radius) ;
+        if (Vector3.Distance(player.transform.position, transform.position) <= col.radius) 
         playerPosition = player.transform.position;
 
 

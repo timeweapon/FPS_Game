@@ -11,14 +11,25 @@ public class StartControl : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         start.onClick.AddListener(PlayGame);
         Exit.onClick.AddListener(ExitGame);
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            PlayGame();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            ExitGame();
+        }
+    }
     private void PlayGame()
     {
-        SceneManager.LoadScene("Demo");
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        SceneManager.LoadScene("Demo");
     }
 
     private void ExitGame()

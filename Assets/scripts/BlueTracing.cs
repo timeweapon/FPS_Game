@@ -25,25 +25,22 @@ public class BlueTracing : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("BlueIn");
-        if (transportenable){
+        // Debug.Log("BlueIn");
+        //Debug.Log(orangecamera.transform.rotation);
+        if (transportenable)
+        {
             orangedoor.GetComponent<OrangeTracing>().transportenable = false;
-            if (other.GetComponent<CharacterController>() != null){
+            if (other.GetComponent<CharacterController>() != null)
+            {
                 other.GetComponent<CharacterController>().enabled = false;
                 other.GetComponent<fps_FPInput>().enabled = false;
+                testcamera.GetComponent<fps_FPCamera>().y_Angle += orangedoor.transform.eulerAngles.y - bluedoor.transform.eulerAngles.y + 180;
             }
-            Vector3 angle;
-            angle = other.transform.root.eulerAngles;
-            angle[1] = 180 + angle[1];
-            if (angle[1] >= 360){
-                angle[1] -= 360;
-            }
-            other.transform.root.rotation = orangecamera.transform.root.rotation;
-
-            other.transform.root.position = orangedoor.transform.position;//- new Vector3(0, 1f, 0);
-            if (other.GetComponent<CharacterController>() != null){
+            other.transform.root.position = orangedoor.transform.position;
+            if (other.GetComponent<CharacterController>() != null)
+            {
                 other.GetComponent<CharacterController>().enabled = true;
-                other.GetComponent<fps_FPInput>().enabled = true ;
+                other.GetComponent<fps_FPInput>().enabled = true;
             }
         }
     }

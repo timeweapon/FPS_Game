@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public enum PlayerState
 {
     None,
@@ -96,7 +98,16 @@ public class fps_PlayerControl : MonoBehaviour
     }
     private void Update()
     {
+        Cursor.visible = false;
         UpdateTime();
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene("Start");
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
     private void UpdateTime()
     { // TODO 做自动加回去的设计
@@ -138,6 +149,7 @@ public class fps_PlayerControl : MonoBehaviour
                 SlowSlider.value = 0;
                 SlowSlider.maxValue = skillColdTime;
                 Time.timeScale /= skillAbility;
+                Time.fixedDeltaTime = Time.timeScale * 0.02f;
                 Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
                 //audioSource.pitch /= skillAbility;
                 //speed *= skillAbility;

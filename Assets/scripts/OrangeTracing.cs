@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrangeTracing : MonoBehaviour
 {
-    public GameObject testcamera ;
+    public GameObject testcamera;
     public GameObject bluecamera;
     public GameObject orangecamera;
     public GameObject bluedoor;
@@ -25,27 +25,26 @@ public class OrangeTracing : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OrangeIn");
-        if (transportenable){
+        //Debug.Log("OrangeIn");
+        //Debug.Log(bluecamera.transform.rotation);
+
+        if (transportenable)
+        {
             bluedoor.GetComponent<BlueTracing>().transportenable = false;
-            if (other.GetComponent<CharacterController>() != null){
+            if (other.GetComponent<CharacterController>() != null)
+            {
                 other.GetComponent<CharacterController>().enabled = false;
                 other.GetComponent<fps_FPInput>().enabled = false;
+                testcamera.GetComponent<fps_FPCamera>().y_Angle += bluedoor.transform.eulerAngles.y - orangedoor.transform.eulerAngles.y + 180;
             }
-            Vector3 angle;
-            angle = other.transform.root.eulerAngles;
-            angle[1] = 180 + angle[1];
-            if (angle[1] >= 360)
+
+            other.transform.root.position = bluedoor.transform.position; //- new Vector3(0, 1f, 0);
+            if (other.GetComponent<CharacterController>() != null)
             {
-                angle[1] -= 360;
-            }
-            other.transform.root.rotation = bluecamera.transform.root.rotation;
-            other.transform.root.position = bluedoor.transform.position - new Vector3(0, 1f, 0);
-            if (other.GetComponent<CharacterController>() != null){
                 other.GetComponent<CharacterController>().enabled = true;
                 other.GetComponent<fps_FPInput>().enabled = true;
             }
-        }       
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -67,7 +66,7 @@ public class OrangeTracing : MonoBehaviour
     {
         var cpos = testcamera.transform.position;
         var mt = orangedoor.transform.worldToLocalMatrix;
-        mt = Matrix4x4.TRS(Vector3.zero, Quaternion.AngleAxis(180, Vector3.up), Vector3.one)*mt;
+        mt = Matrix4x4.TRS(Vector3.zero, Quaternion.AngleAxis(180, Vector3.up), Vector3.one) * mt;
         bluecamera.transform.localPosition = mt.MultiplyPoint(cpos);
         mid = bluecamera.transform.localPosition;
         mid[1] = -mid[1];

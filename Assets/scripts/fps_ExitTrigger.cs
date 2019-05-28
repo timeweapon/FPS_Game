@@ -51,8 +51,6 @@ public class fps_ExitTrigger : MonoBehaviour
 
         }
         if (timer >= timeToRestart)
-            //fader.EndScene();
             SceneManager.LoadScene("Start");
-            Cursor.visible = true;
     }
 }
